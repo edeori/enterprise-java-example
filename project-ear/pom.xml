@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>enterprise-java-example</artifactId>
+		<groupId>com.example</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>project-ear</artifactId>
+	<packaging>ear</packaging>
+
+	<dependencies>
+		<!-- Dependency on the EJB module -->
+		<dependency>
+			<groupId>com.example</groupId>
+			<artifactId>project-ejb</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+
+		<!-- Dependency on the WAR module -->
+		<dependency>
+			<groupId>com.example</groupId>
+			<artifactId>project-web</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>ExampleEAR</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>3.2.0</version> <!-- Adjust to the latest version -->
+				<configuration>
+					<version>6</version> <!-- Specify the Java EE version (e.g., 6, 7, 8) -->
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<modules>
+						<!-- Include the EJB module -->
+						<ejbModule>
+							<groupId>com.example</groupId>
+							<artifactId>project-ejb</artifactId>
+							<bundleFileName>ExampleEJB.jar</bundleFileName>
+						</ejbModule>
+						<!-- Include the WAR module -->
+						<webModule>
+							<groupId>com.example</groupId>
+							<artifactId>project-web</artifactId>
+							<contextRoot>/project-web</contextRoot>
+							<bundleFileName>ExampleWAR.war</bundleFileName>
+						</webModule>
+					</modules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

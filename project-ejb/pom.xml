@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>enterprise-java-example</artifactId>
+		<groupId>com.example</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>project-ejb</artifactId>
+	<packaging>ejb</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<!-- Build with the requested profile: mvn clean package -Pdev -->
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<configFile>application.properties</configFile>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-ejb-plugin</artifactId>
+						<version>${maven-ejb-plugin.version}</version>
+						<configuration>
+							<ejbVersion>3.1</ejbVersion>
+						</configuration>
+					</plugin>
+				</plugins>
+				<resources>
+					<resource>
+						<directory>src/main/resources/dev</directory>
+						<filtering>true</filtering>
+						<includes>
+							<include>**/*.properties</include>
+						</includes>
+					</resource>
+				</resources>
+				<finalName>ExampleEJB</finalName>
+			</build>
+		</profile>
+		<profile>
+			<id>int</id>
+			<properties>
+				<configFile>int/application.properties</configFile>
+			</properties>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources/int</directory>
+						<filtering>true</filtering>
+						<includes>
+							<include>**/*.properties</include>
+						</includes>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+	</profiles>
+
+</project>

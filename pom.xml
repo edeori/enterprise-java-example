@@ -1,0 +1,135 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.example</groupId>
+	<artifactId>enterprise-java-example</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>project-ejb</module>
+		<module>project-web</module>
+		<module>project-ear</module>
+		<module>project-common</module>
+	</modules>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<javax.javaee-api.version>8.0</javax.javaee-api.version>
+		<javax.servlet.version>3.1.0</javax.servlet.version>
+		<maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+		<maven-ejb-plugin.version>3.0.1</maven-ejb-plugin.version>
+		<maven-war-plugin.version>3.3.2</maven-war-plugin.version>
+		<javax.servlet.jsp.version>2.3.3</javax.servlet.jsp.version>
+		<javax.servlet.jsp.jstl.version>1.2.1</javax.servlet.jsp.jstl.version>
+		<javax.xml.ws.version>2.3.1</javax.xml.ws.version>
+		<javax.jws.version>1.1</javax.jws.version>
+		<com.googlecode.json-simple.version>1.1</com.googlecode.json-simple.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- INTERNAL -->
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>project-ejb</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>project-web</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>project-ear</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>project-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<!-- Java EE API dependency -->
+			<dependency>
+				<groupId>javax</groupId>
+				<artifactId>javaee-api</artifactId>
+				<version>${javax.javaee-api.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<!-- Servlet API dependency (if needed) -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${javax.servlet.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.servlet.jsp</groupId>
+				<artifactId>javax.servlet.jsp-api</artifactId>
+				<version>${javax.servlet.jsp.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<!-- JSTL (JavaServer Pages Standard Tag Library, if you plan to use JSP) -->
+			<dependency>
+				<groupId>javax.servlet.jsp.jstl</groupId>
+				<artifactId>javax.servlet.jsp.jstl-api</artifactId>
+				<version>${javax.servlet.jsp.jstl.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.xml.ws</groupId>
+				<artifactId>jaxws-api</artifactId>
+				<version>${javax.xml.ws.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/javax.jws/javax.jws-api -->
+			<dependency>
+				<groupId>javax.jws</groupId>
+				<artifactId>javax.jws-api</artifactId>
+				<version>${javax.jws.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.googlecode.json-simple</groupId>
+				<artifactId>json-simple</artifactId>
+				<version>${com.googlecode.json-simple.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ejb-plugin</artifactId>
+				<version>${maven-ejb-plugin.version}</version>
+				<configuration>
+					<ejbVersion>3.2</ejbVersion>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${maven-war-plugin.version}</version>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
